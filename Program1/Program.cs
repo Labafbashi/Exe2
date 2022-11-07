@@ -7,7 +7,22 @@
         {
             DrawMenu();
             Console.WriteLine("Please select anumber between [0-3]: ");
-            userInput = Int32.Parse(Console.ReadLine());
+            try
+            {
+                userInput = Int32.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("*****************"); 
+                Console.WriteLine("Wrong Value.....");
+                Console.WriteLine("Please enter a number between [0-3]";
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
+                return;
+            }
+            
+
             switch (userInput)
             {
                 case 0:
@@ -28,6 +43,7 @@
 
     private static void DrawMenu()
     {
+        Console.Clear();
         Console.WriteLine("#######################################");
         Console.WriteLine("############# Main Menu ############### \n");
         Console.WriteLine("Please select a number from menu.");
