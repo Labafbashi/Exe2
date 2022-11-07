@@ -6,7 +6,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        int userInput=5;
+        int userInput = 5;
         do
         {
             DrawMenu();
@@ -24,7 +24,7 @@ internal class Program
                 Console.ForegroundColor = ConsoleColor.White;
                 //return;
             }
-            
+
 
             switch (userInput)
             {
@@ -35,13 +35,56 @@ internal class Program
                     OldYoung();
                     break;
                 case 2:
+                    RepitationWord();
                     break;
                 case 3:
+                    WordSplit();
                     break;
                 default:
                     break;
             }
         } while (true);
+    }
+
+    private static void WordSplit()
+    {
+        var sent = "";
+        String[] words;// = new List<string>();
+        WriteMessage("Please enter a sentences to split and print 3th word: ", ConsoleColor.Magenta);
+        sent =Console.ReadLine();
+        words = sent.Split(' ');
+        for (int i = 0; i < words.Length; i++)
+        {
+            Console.WriteLine(words[i]);
+        }
+        WriteMessage($"The 3th word of your sentences is: {words[2]}",ConsoleColor.Green);
+
+        Console.ReadKey();
+    }
+
+    private static void RepitationWord()
+    {
+        int rep;
+        WriteMessage("Please enter a word for repetition: ", ConsoleColor.Cyan);
+        string userInput = Console.ReadLine();
+        WriteMessage("How many times to repetition: ", ConsoleColor.Cyan);
+        try
+        {
+            rep = Int32.Parse(Console.ReadLine());
+        } 
+        catch
+        {
+            rep = 10;
+        }
+        
+        if (rep < 0 || rep > 100) { rep = 10; }
+        
+        for (int i = 0; i < rep-1; i++)
+        {
+            Console.Write($"{i}. {userInput}, ");
+        }
+        Console.Write($"{rep}. {userInput} ");
+        Console.ReadKey();
     }
 
     private static void OldYoung()
