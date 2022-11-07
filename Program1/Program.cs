@@ -49,16 +49,22 @@ internal class Program
     private static void WordSplit()
     {
         var sent = "";
-        String[] words;// = new List<string>();
-        WriteMessage("Please enter a sentences to split and print 3th word: ", ConsoleColor.Magenta);
-        sent =Console.ReadLine();
-        words = sent.Split(' ');
-        for (int i = 0; i < words.Length; i++)
+        String[] words;
+        try
         {
-            Console.WriteLine(words[i]);
+            WriteMessage("Please enter a sentences to split and print 3th word: ", ConsoleColor.Magenta);
+            sent = Console.ReadLine();
+            words = sent.Split(' ');
+            for (int i = 0; i < words.Length; i++)
+            {
+                Console.WriteLine($"{i+1}. {words[i]}");
+            }
+            WriteMessage($"The 3th word of your sentences is: {words[2]}", ConsoleColor.Green);
         }
-        WriteMessage($"The 3th word of your sentences is: {words[2]}",ConsoleColor.Green);
-
+        catch
+        {
+            WriteError("Wrong Value, Please enter a sentences.");
+        }
         Console.ReadKey();
     }
 
@@ -96,12 +102,20 @@ internal class Program
         for(int i = 0; i < guest; i++)
         {
             Console.WriteLine($"Please enter an age, Person {i+1}:");
-            age = Int32.Parse(Console.ReadLine());
-            if (age > 0 && age <= 120)
+            try
             {
-                price = price + CheckAge(age);
+                age = Int32.Parse(Console.ReadLine());
+                if (age > 0 && age <= 120)
+                {
+                    price = price + CheckAge(age);
+                }
+                else
+                {
+                    i--;
+                    WriteError("Wrong Value...");
+                }
             }
-            else
+            catch
             {
                 i--;
                 WriteError("Wrong Value...");
